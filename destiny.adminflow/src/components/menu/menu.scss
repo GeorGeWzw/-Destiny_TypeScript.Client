@@ -1,0 +1,28 @@
+.ivu-menu-submenu-title{
+    background-color: black;
+}
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-opened .ivu-menu-submenu-title{
+    background-color: black;
+}
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item:hover, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title:hover{
+    border-right: none;
+    color: #fff;
+    background: black !important;
+}
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title 
+{
+    color:hsla(0,0%,100%,.7);
+}
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item-active:hover
+{
+    border-right: none;
+    color: #fff;
+    background: #2d8cf0 !important;
+}
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-opened
+{
+    background-color: black !important;
+}
+.ivu-menu-submenu{
+    text-align: left;
+}

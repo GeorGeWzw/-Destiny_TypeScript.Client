@@ -1,5 +1,5 @@
 <template>
-    <Menu :theme="theme2" active-name="1-2" :open-names="['1']">
+    <Menu :theme="theme2" >
                 <Submenu name="1">
                     <template slot="title">
                         <Icon type="ios-paper" />
@@ -35,26 +35,4 @@
             </Menu>
 </template>
 <script lang="ts" src="./menu.ts"></script>
-<style lang="less">
-.ivu-menu-submenu-title{
-    background-color: black;
-}
-.ivu-menu-dark.ivu-menu-vertical .ivu-menu-opened .ivu-menu-submenu-title{
-    background-color: black;
-}
-.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title 
-{
-    color:white;
-}
-.ivu-menu-dark.ivu-menu-vertical .ivu-menu-opened
-{
-    background-color: black !important;
-}
-.ivu-menu-submenu{
-    color: white;
-    text-align: left;
-}
-.ivu-menu-submenu .ivu-menu-itemz{
-    color: white;
-}
-</style>
+<style lang="scss" src="./menu.scss"></style>
