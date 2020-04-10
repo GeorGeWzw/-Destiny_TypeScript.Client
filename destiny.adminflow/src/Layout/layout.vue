@@ -2,7 +2,10 @@
    <Layout class="destiny_layout">
         <Header class="global-header">Header</Header>
         <Layout>
-            <Sider hide-trigger class="layout_sider">Sider</Sider>
+            <Sider hide-trigger style="max-width: 240px;
+    flex:240px;" class="layout_sider">
+              <Menuleft></Menuleft>
+            </Sider>
             <Content class="layout_content">
                 <router-view></router-view>
             </Content>
@@ -15,17 +18,18 @@
 .destiny_layout {
   height: 100%;
   width: 100%;
-  
   .global-header{
     height: calc(70 / 1080 * 100vh);
     line-height: calc(70 / 1080 * 100vh);
     padding: 0px;
     background: white;
     color:black;
+    
   }
   .layout_sider{
     background: #001529;
     color:white;
+    
   }
   .layout_content{
     margin-top: -1px;
