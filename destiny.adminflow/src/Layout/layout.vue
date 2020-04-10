@@ -1,16 +1,21 @@
 <template>
    <Layout class="destiny_layout">
-        <Header class="global-header">Header</Header>
-        <Layout>
-            <Sider hide-trigger style="max-width: 240px;
+        <Sider hide-trigger style="max-width: 240px;
     flex:240px;" class="layout_sider">
+              <div><img src="../assets/logo.png" alt=""></div>
               <Menuleft></Menuleft>
             </Sider>
+        <Layout>
+            <Header class="global-header">
+              <div class="header_bar">
+
+              </div>
+            </Header>
             <Content class="layout_content">
-                <router-view></router-view>
+                sadasa
             </Content>
+            <Footer class="layout_footer">Footer</Footer>
         </Layout>
-        <Footer class="layout_footer">Footer</Footer>
     </Layout>
 </template>
 <script lang="ts" src="./layout.ts"></script>
@@ -19,21 +24,24 @@
   height: 100%;
   width: 100%;
   .global-header{
-    height: calc(70 / 1080 * 100vh);
-    line-height: calc(70 / 1080 * 100vh);
+    height: calc(55 / 1080 * 100vh);
+    line-height: calc(55 / 1080 * 100vh);
     padding: 0px;
     background: white;
     color:black;
-    
+    border: red solid 1px;
+    padding: 0px 20px;
+    .header_bar{
+      height: 100%;
+      width: 100%;
+    }
   }
   .layout_sider{
     background: #001529;
     color:white;
-    
   }
   .layout_content{
-    margin-top: -1px;
-    height: calc(986 / 1080 * 100vh);
+    height: calc(1001 / 1080 * 100vh);
     background-color: white;
   }
   .layout_footer{
@@ -45,6 +53,5 @@
     background: -webkit-gradient(linear, left top, right top, from(#1e3a6f), to(#3d66b8));
     background: linear-gradient(90deg, #1e3a6f 0%, #3d66b8 100%);
   }
-  
 }
 </style>
