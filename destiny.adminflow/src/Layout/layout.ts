@@ -6,9 +6,5 @@ import Menuleft from "@/components/menu/MenuTab.vue"
             Menuleft
         }
 })
-export default class TStest extends Vue{
-    private theme2: string ="dark"
-    private created(){
-        console.log(124512415)
-    }
+export default class Layout extends Vue{
 }

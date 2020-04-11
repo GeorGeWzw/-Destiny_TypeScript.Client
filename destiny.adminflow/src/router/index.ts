@@ -10,16 +10,36 @@ const routes = [
     meta:{
       title:"Lauout"
     },
-    redirect: "/ArchiveView",
+    redirect: "/Home",
     component: ()=>import("@/Layout/layout.vue"),
     children:[
       {
-        path: "ArchiveView",
-        name: "ArchiveView",
+        path: "Home",
+        name: "Home",
         meta: {
-          title: "档案管理"
+          title: "首页",
+          icon:"ios-home-outline",
         },
-        component: () => import("@/views/home-view/home.vue")
+        component: () => import("@/views/home-view/home.vue"),
+      },
+      {
+        path: "Sett",
+        name: "Sett",
+        meta: {
+          title: "系统管理",
+          icon:"ios-settings",
+        },
+        children:[
+          {
+            path: "User",
+            name: "User",
+            meta: {
+              title: "用户管理",
+              icon:"ios-home-outline",
+            },
+            component: () => import("@/views/user-view/user.vue")
+          }
+        ]
       }
     ]
   }

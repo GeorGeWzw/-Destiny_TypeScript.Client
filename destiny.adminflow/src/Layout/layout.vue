@@ -1,6 +1,6 @@
 <template>
   <Layout class="destiny_layout">
-    <Sider hide-trigger style="max-width: 240px;flex:240px;" class="layout_sider">
+    <Sider hide-trigger class="layout_sider">
       <div>
         <img src="../assets/logo.png" alt />
       </div>
@@ -32,13 +32,17 @@
           <div class="tag-nav-wrapper">
             <div class="tags-nav">
               <div class="btn-con left-btn">
-                <Button type="text"><Icon type="ios-arrow-back" style="font-size: 18px;"/></Button>
+                <Button type="text">
+                  <Icon type="ios-arrow-back" style="font-size: 18px;" />
+                </Button>
               </div>
               <div class="btn-con right-btn">
-                <Button type="text"><Icon type="ios-arrow-forward"  style="font-size: 18px;" /></Button>
+                <Button type="text">
+                  <Icon type="ios-arrow-forward" style="font-size: 18px;" />
+                </Button>
               </div>
               <div class="scroll-outer">
-                <div class="scroll-body"> 
+                <div class="scroll-body">
                   <Tag type="dot">标签一01</Tag>
                   <Tag type="dot">标签一02</Tag>
                   <Tag type="dot">标签一03</Tag>
@@ -46,7 +50,6 @@
                   <Tag type="dot">标签一05</Tag>
                 </div>
               </div>
-                
             </div>
           </div>
           <router-view class="layout_content_view"></router-view>

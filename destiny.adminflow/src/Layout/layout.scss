@@ -36,6 +36,10 @@
     .layout_sider{
       background: #001529;
       color:white;
+      width: 240px !important;
+      max-width: 240px !important;
+      min-width: 240px !important;
+      flex: 0 0 240px;
     }
     .layout_content{
       height: calc(1001 / 1080 * 100vh);
