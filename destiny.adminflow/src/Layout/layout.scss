@@ -53,6 +53,48 @@
           -ms-user-select: none;
           user-select: none;
           box-shadow: inset 0 0 3px 2px hsla(0,0%,39.2%,.1);
+          .btn-con{
+            position: absolute;
+            top: 0;
+            height: 40px;
+            background: #fff;
+            z-index: 10;
+          }
+          .btn-con{
+            padding-top: 3px;
+            button{
+              padding: 6px 0px;
+              line-height: 14px;
+              text-align: center;
+            }
+            .ivu-btn-text {
+              background-color: white;
+              border-color: white;
+            }
+          }
+          .btn-con.right-btn{
+            right: 0px;
+            border-right: 1px solid #f0f0f0;
+          }
+          .scroll-outer{
+            position: absolute;
+            left: 28px;
+            right: 61px;
+            top: 0;
+            bottom: 0;
+            -webkit-box-shadow: 0 0 3px 2px hsla(0,0%,39.2%,.1) inset;
+            box-shadow: inset 0 0 3px 2px hsla(0,0%,39.2%,.1);
+            .scroll-body{
+              height: calc(100% - 1px);
+              display: inline-block;
+              padding: 1px 4px 0;
+              position: absolute;
+              overflow: visible;
+              white-space: nowrap;
+              -webkit-transition: left .3s ease;
+              transition: left .3s ease;
+            }
+          }
         }
       }
     }
@@ -62,7 +104,6 @@
       line-height: calc(24 / 1080 * 100vh);
       text-align: center;
       padding: 0px;
-      background: -webkit-gradient(linear, left top, right top, from(#1e3a6f), to(#3d66b8));
-      background: linear-gradient(90deg, #1e3a6f 0%, #3d66b8 100%);
+      background: #001529;
     }
   }

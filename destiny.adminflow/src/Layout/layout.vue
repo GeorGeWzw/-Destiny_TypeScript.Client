@@ -30,7 +30,24 @@
       <transition name="fade">
         <Content class="layout_content">
           <div class="tag-nav-wrapper">
-            <div class="tags-nav"></div>
+            <div class="tags-nav">
+              <div class="btn-con left-btn">
+                <Button type="text"><Icon type="ios-arrow-back" style="font-size: 18px;"/></Button>
+              </div>
+              <div class="btn-con right-btn">
+                <Button type="text"><Icon type="ios-arrow-forward"  style="font-size: 18px;" /></Button>
+              </div>
+              <div class="scroll-outer">
+                <div class="scroll-body"> 
+                  <Tag type="dot">标签一01</Tag>
+                  <Tag type="dot">标签一02</Tag>
+                  <Tag type="dot">标签一03</Tag>
+                  <Tag type="dot">标签一04</Tag>
+                  <Tag type="dot">标签一05</Tag>
+                </div>
+              </div>
+                
+            </div>
           </div>
           <router-view class="layout_content_view"></router-view>
         </Content>

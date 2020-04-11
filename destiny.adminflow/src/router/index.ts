@@ -10,7 +10,18 @@ const routes = [
     meta:{
       title:"Lauout"
     },
-    component: ()=>import("@/Layout/layout.vue")
+    redirect: "/ArchiveView",
+    component: ()=>import("@/Layout/layout.vue"),
+    children:[
+      {
+        path: "ArchiveView",
+        name: "ArchiveView",
+        meta: {
+          title: "档案管理"
+        },
+        component: () => import("@/views/home-view/home.vue")
+      }
+    ]
   }
 ];
 
