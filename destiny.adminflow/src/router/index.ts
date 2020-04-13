@@ -29,6 +29,7 @@ const routes = [
           title: "系统管理",
           icon:"ios-settings",
         },
+        component: ()=>import("@/Layout/empty.vue"),
         children:[
           {
             path: "User",

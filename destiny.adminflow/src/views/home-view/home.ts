@@ -5,7 +5,7 @@ import Roleservice from '@/core/domain/services/roleservice/RoleService';
 @Component({
     name: "home",
 })
-export default class User extends Vue {
+export default class Home extends Vue {
     // private temp: Roleservice;
     // constructor() {
     //     super();
