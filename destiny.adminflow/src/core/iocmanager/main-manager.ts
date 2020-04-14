@@ -18,7 +18,6 @@ export class MainManager{
         return this.services.RoleServices;
     }
     public get UserService():IUserService{
-        debugger
         return this.services.UserServices;
     }
     //#endregion

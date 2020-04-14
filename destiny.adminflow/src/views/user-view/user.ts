@@ -13,7 +13,7 @@ export default class User extends Vue{
     }
     private mounted()
     {
-        this.getUser()
+        // this.getUser()
     }
     ///获取数据
     private async getUser()

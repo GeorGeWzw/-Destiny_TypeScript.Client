@@ -97,6 +97,9 @@
               white-space: nowrap;
               -webkit-transition: left .3s ease;
               transition: left .3s ease;
+              span a{
+                color: black;
+              }
             }
           }
         }
@@ -109,5 +112,9 @@
       text-align: center;
       padding: 0px;
       background: #001529;
+    }
+    .ivu-tag-error, .ivu-tag-error .ivu-icon-ios-close, .ivu-tag-error .ivu-icon-ios-close:hover, .ivu-tag-error a, .ivu-tag-error a:hover, .ivu-tag-primary, .ivu-tag-primary .ivu-icon-ios-close, .ivu-tag-primary .ivu-icon-ios-close:hover, .ivu-tag-primary a, .ivu-tag-primary a:hover, .ivu-tag-success, .ivu-tag-success .ivu-icon-ios-close, .ivu-tag-success .ivu-icon-ios-close:hover, .ivu-tag-success a, .ivu-tag-success a:hover, .ivu-tag-warning, .ivu-tag-warning .ivu-icon-ios-close, .ivu-tag-warning .ivu-icon-ios-close:hover, .ivu-tag-warning a, .ivu-tag-warning a:hover
+    {
+      color: black;
     }
   }
