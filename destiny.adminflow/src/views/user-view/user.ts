@@ -18,7 +18,7 @@ export default class User extends Vue{
     ///获取数据
     private async getUser()
     {
-        this.TableData= await (await MainManager.Instance().UserService.GetPage(this.query)).Data;
+        this.TableData = await (await MainManager.Instance().UserService.GetPage(this.query)).Data;
         console.log(this.TableData);
     }
 }
