@@ -45,12 +45,12 @@
                 <div class="scroll-body">
                   <span v-for=" item in this.$store.state.TagList" :key="item.path">
                     <span v-if="item.IsColse==true">
-                      <Tag type="dot" closable v-if="item.path==$route.path" on-close="Coldses" color="primary"><router-link :to="item.path">{{item.lable}}</router-link> </Tag>
-                      <Tag type="dot" closable v-else > <router-link :to="item.path">{{item.lable}}</router-link ></Tag>
+                      <Tag type="dot" closable v-if="item.path==$route.path" @on-close="Coldses" :name="item.path" color="primary"><router-link :to="item.path">{{item.lable}}</router-link> </Tag>
+                      <Tag type="dot" closable v-else :name="item.path"  > <router-link :to="item.path">{{item.lable}}</router-link ></Tag>
                     </span>
                     <span v-else>
-                      <Tag type="dot" v-if="item.path==$route.path" color="primary"><router-link :to="item.path">{{item.lable}}</router-link></Tag>
-                      <Tag type="dot" v-else ><router-link :to="item.path"> {{item.lable}}</router-link></Tag>
+                      <Tag type="dot" v-if="item.path==$route.path" :name="item.path"  color="primary"><router-link :to="item.path">{{item.lable}}</router-link></Tag>
+                      <Tag type="dot" v-else :name="item.path"  ><router-link :to="item.path"> {{item.lable}}</router-link></Tag>
                     </span>
                   </span>
                 </div>
