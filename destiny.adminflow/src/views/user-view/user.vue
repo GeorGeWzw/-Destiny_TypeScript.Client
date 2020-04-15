@@ -1,7 +1,5 @@
 <template>
-    <div>
-        15asd15实打实大多as1d5a1d5a
-    </div>
+  <i-table :columns="columns" :data="TableData"></i-table>
 </template>
 <script lang="ts" src="./user.ts">
 </script>
