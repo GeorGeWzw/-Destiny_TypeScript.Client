@@ -39,6 +39,15 @@ const routes = [
               icon:"ios-home-outline",
             },
             component: () => import("@/views/user-view/user.vue")
+          },
+          {
+            path: "Role",
+            name: "Role",
+            meta: {
+              title: "角色管理",
+              icon:"ios-home-outline",
+            },
+            component: () => import("@/views/role-view/role.vue")
           }
         ]
       }

@@ -34,7 +34,7 @@ export default class MenuLeft extends Vue {
                     }
                     else {
                         model.lable = element.meta.title;
-                        model.path = "/" + parentpath + "/" + name;
+                        model.path = parentpath + "/" + name;
                     }
                     let getindex = _this.$store.state.TagList.findIndex((x: { path: string; }) => x.path == model.path);
                     if (getindex < 0) {
@@ -49,7 +49,7 @@ export default class MenuLeft extends Vue {
                 }
                 else {
                     if (arr[index].children != undefined) {
-                        parentpath = arr[index].path;
+                        parentpath += "/"+arr[index].path;
                         if (arr[index].children.length > 0) {
                             ergodic(arr[index].children)
                         }

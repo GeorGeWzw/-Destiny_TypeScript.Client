@@ -1,5 +1,4 @@
-export class Role{
-    id: string = "";
+export class RoleAddDto{
     userName: string = "";
     nickName: string = "";
     createdTime: string = "";
