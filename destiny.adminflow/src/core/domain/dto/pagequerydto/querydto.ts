@@ -18,6 +18,7 @@ export class PageParameters {
     // constructor(pageIndex: number = 1, pageSize = 10) {
 
     //     this.PageIndex = pageIndex;
+
     //     this.PageSize = pageSize;
     // }
     public PageIndex: number = 1;
