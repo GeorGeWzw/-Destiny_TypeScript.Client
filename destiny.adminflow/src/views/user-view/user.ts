@@ -7,7 +7,8 @@ import { UserTable } from "@/core/domain/dto/userdto/UserDto"
 })
 export default class User extends Vue {
     private query: Pagination = new Pagination();
-    private TableData: UserTable[]=[];
+    private TableData: UserTable[] = [];
+    private Total: number = 0;
     private columns = [
         {
             title: '用户名',
@@ -50,13 +51,18 @@ export default class User extends Vue {
 
         // let orderCondition: OrderCondition[] = [SO];
         // orderCondition.push();
-        // let page = new PageParameters();
+        let page = new PageParameters();
 
-        // this.query.PageParameters = page;
+        this.query.PageParameters = page;
 
-        console.log(this.query);
-        let data = (await MainManager.Instance().UserService.GetPage(this.query)).Data;
-        this.TableData = data;
+
+        let data = (await MainManager.Instance().UserService.GetPage(this.query));
+        this.TableData = data.Data;
+        this.Total = data.Total;
+
+        console.log(data);
+        // console.log(data);
+        //this.TableData = data;
         //console.log();
     }
 }
