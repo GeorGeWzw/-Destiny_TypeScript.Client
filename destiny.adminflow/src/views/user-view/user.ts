@@ -7,8 +7,8 @@ import { UserTable } from "@/core/domain/dto/userdto/UserDto"
 })
 export default class User extends Vue {
     private query: Pagination = new Pagination();
-    @Prop() private TableData!: UserTable;
-    @Prop() private columns = [
+    private TableData: UserTable[]=[];
+    private columns = [
         {
             title: '用户名',
             key: 'UserName',

@@ -10,7 +10,7 @@ import UserApiBase from "@/core/data-source/requestapi/userapi/userrequestApi.ts
 
 @injectable()
 export default class UserService implements IUserService {
-    GetPage(_query: Pagination): Promise<IServcerReturn<UserTable>> {
+    GetPage(_query: Pagination): Promise<IServcerReturn<UserTable[]>> {
         // console.log(_query);
         return UserApiBase.GetPage(_query);
     }

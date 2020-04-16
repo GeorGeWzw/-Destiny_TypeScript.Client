@@ -8,9 +8,9 @@ export default class UserApiBase {
     /*
         _query查询条件
      */
-    static GetPage(_query: Pagination): Promise<IServcerReturn<UserTable>> {
+    static GetPage(_query: Pagination): Promise<IServcerReturn<UserTable[]>> {
         return new Promise((resolve, reject) => {
-            requsest.post(UserApiInfo.GetPageUser, _query).then((response: any) => {
+            requsest.get(UserApiInfo.GetPageUser).then((response: any) => {
                 resolve(response);
             })
                 .catch((error: any) => {
