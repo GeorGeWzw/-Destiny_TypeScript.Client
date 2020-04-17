@@ -2,12 +2,19 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 import { Pagination, PageParameters, OrderCondition, SortDirection } from '@/core/domain/dto/pagequerydto/querydto.ts'
 import { MainManager } from "@/core/iocmanager/main-manager"
 import { UserTable } from "@/core/domain/dto/userdto/UserDto"
+import PageCom from "@/components/Page/page.vue"
+import { PageComponentData } from "@/core/domain/dto/pagecomponent/Pagecomponent"
+
 @Component({
     name: "user",
+    components: {
+        PageCom
+    }
 })
 export default class User extends Vue {
     private query: Pagination = new Pagination();
     private TableData: UserTable[] = [];
+    private page: PageComponentData = new PageComponentData();
     private Total: number = 0;
     private columns = [
         {
@@ -59,6 +66,7 @@ export default class User extends Vue {
         let data = (await MainManager.Instance().UserService.GetPage(this.query));
         this.TableData = data.Data;
         this.Total = data.Total;
+
 
         console.log(data);
         // console.log(data);

@@ -2,15 +2,15 @@
 <template>
   <Card :bordered="false">
     <div class="content">
-      <Form ref="formInline" inline>
-        <FormItem prop="user">
-          <Input type="text" placeholder="Username" />
-          <Icon type="ios-person-outline" slot="prepend"></Icon>
-        </FormItem>
-      </Form>
+      <i-form :label-width="80" inline>
+        <Form-item label="用户名">
+          <i-input placeholder="用户名"></i-input>
+        </Form-item>
+      </i-form>
     </div>
     <i-table :columns="columns" :data="TableData"></i-table>
-    <Page :total="Total"></Page>
+    <Page :total="page.Total" />
+    <!-- <PageCom></PageCom> -->
   </Card>
   <!-- <div>
     <i-table :columns="columns" :data="TableData"></i-table>
@@ -55,6 +55,7 @@
 
 .table {
   height: 100%;
+  max-height: 500;
 }
 .content {
   .table-operator {

@@ -22,7 +22,7 @@ export class PageParameters {
     //     this.PageSize = pageSize;
     // }
     public PageIndex: number = 1;
-    public PageSize: number = 10;
+    public PageSize: number = 1;
     public OrderConditions: OrderCondition[] = [];
 
 }
