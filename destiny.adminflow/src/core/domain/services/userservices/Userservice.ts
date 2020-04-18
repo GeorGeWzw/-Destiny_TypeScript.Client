@@ -6,11 +6,13 @@ import { Pagination } from "@/core/domain/dto/pagequerydto/querydto.ts";
 import { UserTable } from '../../dto/userdto/UserDto';
 import { IUserService } from "./IUserservice"
 import UserApiBase from "@/core/data-source/requestapi/userapi/userrequestApi.ts"
+import { PageData } from '../../dto/pageDto/pageListDto';
 
 
 @injectable()
-export default class UserService implements IUserService{
-    GetPage(_query: Pagination): Promise<IServcerReturn<UserTable>> {
+export default class UserService implements IUserService {
+    GetPage(_query: Pagination): Promise<PageData<UserTable>> {
+        console.log(_query);
         return UserApiBase.GetPage(_query);
     }
 
