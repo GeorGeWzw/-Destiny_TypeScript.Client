@@ -12,7 +12,6 @@ import { PageData } from '../../dto/pageDto/pageListDto';
 @injectable()
 export default class UserService implements IUserService {
     GetPage(_query: Pagination): Promise<PageData<UserTable>> {
-        console.log(_query);
         return UserApiBase.GetPage(_query);
     }
 

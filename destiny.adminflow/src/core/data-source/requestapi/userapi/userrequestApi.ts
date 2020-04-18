@@ -12,6 +12,7 @@ export default class UserApiBase {
     static GetPage(_query: Pagination): Promise<PageData<UserTable>> {
         return new Promise((resolve, reject) => {
             requsest.post(UserApiInfo.GetPageUser, _query).then((response: any) => {
+                console.log("dfs");
                 resolve(response);
             })
                 .catch((error: any) => {
