@@ -1,7 +1,12 @@
+const pagesize: number[] = [10, 20, 50, 100];
 ///分页数据
 export class PageComponentData {
-    private Total: number = 2;
-    private PasizeArr: any[] | undefined;
-    private PageRow: number = 2;
-    private PageIndex: number = 0;
+    public Total: number = 80;
+    public PasizeArr: number[]=pagesize;
+    public PageRow: number = 10;
+    public PageIndex: number = 1;
+}
+
+export class PaginationHandle{
+    public Pagination: PageComponentData = new PageComponentData();
 }

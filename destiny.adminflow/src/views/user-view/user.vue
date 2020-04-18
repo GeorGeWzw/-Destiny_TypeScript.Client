@@ -9,8 +9,8 @@
       </i-form>
     </div>
     <i-table :columns="columns" :data="TableData"></i-table>
-    <Page :total="Total" :current="pgeIndex" :page-size="1" @on-change="change"></Page>
-    <!-- <PageCom></PageCom> -->
+    <!-- <Page :total="Total" :current="pgeIndex" :page-size="1" @on-change="change"></Page> -->
+    <PageCom v-on:pageref="getUser"></PageCom>
   </Card>
   <!-- <div>
     <i-table :columns="columns" :data="TableData"></i-table>

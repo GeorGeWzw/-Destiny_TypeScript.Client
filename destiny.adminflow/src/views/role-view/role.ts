@@ -2,7 +2,7 @@ import {Component, Vue} from "vue-property-decorator";
 import {Pagination} from '@/core/domain/dto/pagequerydto/querydto.ts'
 import {MainManager} from "@/core/iocmanager/main-manager"
 import {RoleAddDto} from "@/core/domain/dto/roledto/RoleDto"
-import Roleadd from "@/views/role-view/"
+import Roleadd from "@/views/role-view/roleadd"
 
 @Component({
     name:"role",

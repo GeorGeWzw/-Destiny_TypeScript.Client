@@ -1,9 +1,11 @@
 <template>
   <Page
-    :total="page.Total"
-    :current="page.PageIndex"
-    :page-size-opts="page.PasizeArr"
-    :page-size="page.PageRow"
+    :total="Paginationhan.Pagination.Total"
+    :current="Paginationhan.Pagination.PageIndex"
+    :page-size-opts="Paginationhan.Pagination.PasizeArr"
+    :page-size="Paginationhan.Pagination.PageRow"
+    @on-change="ClickCurrentPage"
+    @on-page-size-change="UpdatePageRow"
     show-sizer
   />
 </template>
