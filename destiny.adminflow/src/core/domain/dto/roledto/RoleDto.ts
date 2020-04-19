@@ -1,10 +1,8 @@
+import {Guid} from "guid-typescript"
 export class RoleAddDto{
-    userName: string = "";
-    nickName: string = "";
-    createdTime: string = "";
-    isSystem: boolean=false;
-    lastModifierTime: string = "";
-    isDeleted: boolean=false;
+    name: string = "";
+    normalizedName: string = "";
     description: string = "";
-    sex: number=0;
+    isAdmin: boolean=false;
+    id:string=Guid.EMPTY;
 }

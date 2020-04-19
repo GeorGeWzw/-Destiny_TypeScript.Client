@@ -1,24 +1,29 @@
-import {Component, Vue} from "vue-property-decorator";
+import {Component, Vue, Ref, Mixins} from "vue-property-decorator";
 import {Pagination} from '@/core/domain/dto/pagequerydto/querydto.ts'
 import {MainManager} from "@/core/iocmanager/main-manager"
-import {RoleAddDto} from "@/core/domain/dto/roledto/RoleDto"
+import RoleAddCom from "./roleadd.vue"
 import Roleadd from "@/views/role-view/roleadd"
 
 @Component({
     name:"role",
+    components:{
+        RoleAddCom
+    }
 })
-export default class User extends Vue{
+export default class Role extends Mixins(){
     private query:Pagination=new Pagination();
-    private Roleadd:RoleAddDto=new RoleAddDto;
-    private created(){
-        
-    }
-    private mounted()
+    @Ref("RoleAddInfo")
+    private RoleAddInfo!:Roleadd; 
+    /*
+        添加按钮
+    */
+    private AddRole()
     {
-        //this.getUser()
-    }
-    ///获取数据
-    private async get()
-    {
+        this.RoleAddInfo.ShowWindow((res:boolean)=>{
+            if(res)
+            {
+                // this.get();
+            }
+        })
     }
 }
