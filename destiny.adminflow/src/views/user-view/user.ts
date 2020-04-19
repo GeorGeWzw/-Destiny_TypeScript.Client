@@ -20,12 +20,20 @@ export default class User extends Vue {
     private pageSize: number = 1;
     private pgeIndex: number = 1;
     private selections: [] = [];
-    private visible111 = false;
+    private isShow = false;
     public loading: boolean = true;
     private Pagination: PaginationHandle = new PaginationHandle();
     @Ref("page")
     private page!: Page;
     private Total: number = 0;
+
+    private formItem: any = {
+        Id: "",
+        UserName: "",
+        NickName: "",
+        PasswordHash: "",
+    };
+
     private columns = [
         {
             type: 'selection',
@@ -71,7 +79,7 @@ export default class User extends Vue {
         // alert("dfdf");
         // this.visible111 = true;
 
-        this.visible111 = true;
+        this.isShow = true;
         // this.getSingleSeletedRow(this.selections, function (id: string, row: any) {
 
         // });
@@ -80,10 +88,10 @@ export default class User extends Vue {
     private deleteHandle(): void {
 
         this.getSingleSeletedRow(this.selections, function (id: string, row: any) {
-            let param = Object.assign({ id: id });
+            let param = Object.assign({ "id": id });
             requsest.delete(UserApiInfo.DeleteUser, param).then((response: any) => {
 
-                console.log("23");
+
 
             }).catch((error: any) => {
 
@@ -130,6 +138,10 @@ export default class User extends Vue {
         };
 
         fun();
+
+    }
+
+    private handleSubmit(): void {
 
     }
 }
