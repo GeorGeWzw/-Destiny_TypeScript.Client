@@ -14,10 +14,35 @@
     </div>
     <i-table :columns="columns" :data="TableData" @on-selection-change="selectionChange"></i-table>
     <PageCom v-on:pageref="getUser"></PageCom>
-    <Modal :mask-closable="false" :visible.sync="visible111" title="编辑表单">
-      <p>对话框内容</p>
-      <p>对话框内容</p>
-      <p>对话框内容</p>
+    <Modal
+      v-model="isShow"
+      :mask-closable="false"
+      title="编辑用户"
+      :closable="false"
+      :footer-hide="true"
+    >
+      <Form :model="formItem" :label-width="80">
+        <FormItem label="登录名:">
+          <Input v-model="formItem.UserName" />
+        </FormItem>
+        <FormItem label="用户昵称:">
+          <Input v-model="formItem.NickName" />
+        </FormItem>
+        <FormItem label="密码:" prop="passwd">
+          <Input type="password" v-model="formItem.PasswordHash" />
+        </FormItem>
+        <FormItem>
+          <Button type="primary" @click="handleSubmit">提交</Button>
+        </FormItem>
+        <!-- <FormItem label="Select">
+            <Select v-model="formItem.select">
+                <Option value="beijing">New York</Option>
+                <Option value="shanghai">London</Option>
+                <Option value="shenzhen">Sydney</Option>
+            </Select>
+        </FormItem>
+        -->
+      </Form>
     </Modal>
   </Card>
 
