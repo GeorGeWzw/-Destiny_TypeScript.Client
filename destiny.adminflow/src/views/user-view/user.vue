@@ -18,8 +18,9 @@
       v-model="isShow"
       :mask-closable="false"
       title="编辑用户"
-      :closable="false"
+      :closable="true"
       :footer-hide="true"
+      :loading="confirmLoading"
     >
       <Form :model="formItem" :label-width="80">
         <FormItem label="登录名:">
@@ -28,8 +29,22 @@
         <FormItem label="用户昵称:">
           <Input v-model="formItem.NickName" />
         </FormItem>
+        <FormItem label="姓别:">
+          <Select v-model="formItem.Sex">
+            <Option v-for="sex in sexList" :value="sex.value" :key="sex.value">{{ sex.label }}</Option>
+          </Select>
+        </FormItem>
+        <FormItem label="是否系统:">
+          <i-switch v-model="formItem.IsSystem" size="large">
+            <span slot="open">是</span>
+            <span slot="close">否</span>
+          </i-switch>
+        </FormItem>
         <FormItem label="密码:" prop="passwd">
           <Input type="password" v-model="formItem.PasswordHash" />
+        </FormItem>
+        <FormItem label="描述:">
+          <Input type="textarea" :rows="4" v-model="formItem.Description" />
         </FormItem>
         <FormItem>
           <Button type="primary" @click="handleSubmit">提交</Button>

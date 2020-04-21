@@ -8,6 +8,8 @@ import Page from "@/components/Page/page"
 
 import requsest from '@/utils/request.ts'
 import { UserApiInfo } from '@/core/apiconfig/ApiRouter';
+import { Sex } from '@/core/model/model';
+import { AjaxResult } from '@/core/domain/dto/operationdto/AjaxResult';
 @Component({
     name: "user",
     components: {
@@ -15,24 +17,38 @@ import { UserApiInfo } from '@/core/apiconfig/ApiRouter';
     }
 })
 export default class User extends Vue {
+
+
     private query: Pagination = new Pagination();
     private TableData: UserTable[] = [];
     private pageSize: number = 1;
     private pgeIndex: number = 1;
     private selections: [] = [];
     private isShow = false;
-    public loading: boolean = true;
+    public confirmLoading: boolean = false;
     private Pagination: PaginationHandle = new PaginationHandle();
     @Ref("page")
     private page!: Page;
     private Total: number = 0;
 
     private formItem: any = {
-        Id: "",
+
         UserName: "",
         NickName: "",
         PasswordHash: "",
+        Sex: 0,
+        Description: "",
+        IsSystem: false,
     };
+
+    private sexList: any = [{
+        value: Sex.Man,
+        label: '男'
+    }, {
+        value: Sex.Female,
+        label: '女'
+    }];
+
 
     private columns = [
         {
@@ -66,6 +82,7 @@ export default class User extends Vue {
     private async getUser(_Paginationhan: PaginationHandle) {
         this.query.PageIndex = _Paginationhan.Pagination.PageIndex;
         this.query.PageSize = _Paginationhan.Pagination.PageRow;
+
         // this.query.OrderConditions = [
         //     { SortDirection: SortDirection.Ascending, SortField: "Id" },
         //     { SortDirection: SortDirection.Descending, SortField: "Name" }
@@ -73,6 +90,7 @@ export default class User extends Vue {
         let data = (await MainManager.Instance().UserService.GetPage(this.query));
         this.TableData = data.Data;
         _Paginationhan.Pagination.Total = data.Total;
+        console.log(_Paginationhan.Pagination.Total);
     }
 
     private addHandle(): void {
@@ -142,6 +160,23 @@ export default class User extends Vue {
     }
 
     private handleSubmit(): void {
+        let pa = Object.assign(this.formItem);
+        this.confirmLoading = true;
+        requsest.post(UserApiInfo.AddUser, pa).then((response: any) => {
 
+            let result = response as AjaxResult;
+            if (!result.Success) {
+
+                this.$Message.error(result.Message);
+            }
+            else {
+                this.isShow = false;
+            }
+
+            this.confirmLoading = false;
+        }).catch((error: any) => {
+
+        });
+        // console.log(Object.assign(this.formItem));
     }
 }
