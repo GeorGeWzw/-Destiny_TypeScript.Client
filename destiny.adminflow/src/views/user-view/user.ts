@@ -39,6 +39,7 @@ export default class User extends Vue {
         Sex: 0,
         Description: "",
         IsSystem: false,
+        IsAdd: true,
     };
 
     private sexList: any = [{
@@ -72,7 +73,21 @@ export default class User extends Vue {
             key: 'CreatedTime',
 
         }
+        ,
+        {
+            title: '修改时间',
+            key: 'LastModifierTime',
+
+        }
+        ,
+        {
+            title: '描述',
+            key: 'Description',
+
+        }
     ];
+
+    private delteLoading: boolean = false;
     private mounted() {
         // lat 
         this.getUser(this.Pagination)
@@ -90,29 +105,33 @@ export default class User extends Vue {
         let data = (await MainManager.Instance().UserService.GetPage(this.query));
         this.TableData = data.Data;
         _Paginationhan.Pagination.Total = data.Total;
-        console.log(_Paginationhan.Pagination.Total);
     }
 
     private addHandle(): void {
-        // alert("dfdf");
-        // this.visible111 = true;
 
-        this.isShow = true;
-        // this.getSingleSeletedRow(this.selections, function (id: string, row: any) {
+        let $this = this;
+        this.getSingleSeletedRow(this.selections, function (id: string, row: any) {
 
-        // });
+        });
     }
 
     private deleteHandle(): void {
-
+        let $this = this;
+        $this.delteLoading = true;
         this.getSingleSeletedRow(this.selections, function (id: string, row: any) {
-            let param = Object.assign({ "id": id });
-            requsest.delete(UserApiInfo.DeleteUser, param).then((response: any) => {
 
+            requsest.delete<any, AjaxResult>(UserApiInfo.DeleteUser, {
+                params: {
+                    id: id,
+                }
+            }).then((result: AjaxResult) => {
 
+                $this.delteLoading = false;
+                $this.$Message.info(result.Message);
+                $this.getUser($this.Pagination);
 
-            }).catch((error: any) => {
-
+            }).catch((error: AjaxResult) => {
+                $this.$Message.info(error.Message);
             });
         });
 
@@ -120,7 +139,8 @@ export default class User extends Vue {
 
     private cancel(): void {
 
-
+        this.isShow = false;
+        this.formItem = [];
     }
 
     private selectionChange(selection: any): void {
@@ -159,20 +179,41 @@ export default class User extends Vue {
 
     }
 
-    private handleSubmit(): void {
+
+    private updateHandle(): void {
+        let $this = this;
+        this.getSingleSeletedRow(this.selections, function (id: string, row: any) {
+
+            requsest.get(UserApiInfo.LoadUser, {
+                params: {
+                    id: id
+                }
+            }).then((response: any) => {
+                let result = response as AjaxResult;
+                $this.isShow = true;
+                $this.formItem = result.Data;
+                $this.formItem.IsAdd = false;
+
+            }).catch((error: any) => {
+
+
+            });
+        });
+
+    }
+
+    private async handleSubmit() {
         let pa = Object.assign(this.formItem);
         this.confirmLoading = true;
-        requsest.post(UserApiInfo.AddUser, pa).then((response: any) => {
+        requsest.post(UserApiInfo.AddUser, pa).then(async (response: any) => {
 
             let result = response as AjaxResult;
-            if (!result.Success) {
+            this.$Message.info(result.Message);
+            if (result.Success) {
 
-                this.$Message.error(result.Message);
-            }
-            else {
                 this.isShow = false;
+                await this.getUser(this.Pagination);
             }
-
             this.confirmLoading = false;
         }).catch((error: any) => {
 

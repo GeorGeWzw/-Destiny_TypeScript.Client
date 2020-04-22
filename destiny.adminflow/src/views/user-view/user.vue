@@ -10,7 +10,8 @@
     </div>-->
     <div class="table-operator">
       <i-button type="primary" @click="addHandle">新增</i-button>
-      <i-button type="primary" @click="deleteHandle">删除</i-button>
+      <i-button type="primary" @click="updateHandle">修改</i-button>
+      <i-button type="primary" @click="deleteHandle" :loading="delteLoading">删除</i-button>
     </div>
     <i-table :columns="columns" :data="TableData" @on-selection-change="selectionChange"></i-table>
     <PageCom v-on:pageref="getUser"></PageCom>
@@ -18,7 +19,7 @@
       v-model="isShow"
       :mask-closable="false"
       title="编辑用户"
-      :closable="true"
+      :closable="false"
       :footer-hide="true"
       :loading="confirmLoading"
     >
@@ -40,7 +41,8 @@
             <span slot="close">否</span>
           </i-switch>
         </FormItem>
-        <FormItem label="密码:" prop="passwd">
+
+        <FormItem label="密码:" prop="passwd" v-if="formItem.IsAdd">
           <Input type="password" v-model="formItem.PasswordHash" />
         </FormItem>
         <FormItem label="描述:">
@@ -48,6 +50,7 @@
         </FormItem>
         <FormItem>
           <Button type="primary" @click="handleSubmit">提交</Button>
+          <Button type="primary" @click="cancel">取消</Button>
         </FormItem>
         <!-- <FormItem label="Select">
             <Select v-model="formItem.select">

@@ -4,17 +4,17 @@ import { PaginationHandle } from "@/core/domain/dto/pagecomponent/Pagecomponent"
     name: "page",
 })
 export default class Page extends Vue {
-    public Paginationhan: PaginationHandle = new PaginationHandle();    
+    public Paginationhan: PaginationHandle = new PaginationHandle();
     //修改每页行数时触发
-    private UpdatePageRow(Row: any)
-    {
-        this.Paginationhan.Pagination.PageRow=Row;
-        this.$emit("pageref",this.Paginationhan)
+    private UpdatePageRow(Row: any) {
+        console.log("Row", Row);
+        this.Paginationhan.Pagination.PageRow = Row;
+        this.$emit("pageref", this.Paginationhan)
     }
     //修改当前页时触发
-    private ClickCurrentPage(index:any)
-    {
-        this.Paginationhan.Pagination.PageIndex=index;
-        this.$emit("pageref",this.Paginationhan)
+    private ClickCurrentPage(index: any) {
+        console.log("index", index);
+        this.Paginationhan.Pagination.PageIndex = index;
+        this.$emit("pageref", this.Paginationhan)
     }
 }

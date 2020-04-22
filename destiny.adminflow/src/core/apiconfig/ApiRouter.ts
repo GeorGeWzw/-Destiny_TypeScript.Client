@@ -12,4 +12,5 @@ export const UserApiInfo = {
     AddUser: "api/User/AddOrUpdateAsync",
     EditUser: "",
     DeleteUser: "api/User/DeleteAsync",
+    LoadUser: "api/User/LoadAsync",
 }
