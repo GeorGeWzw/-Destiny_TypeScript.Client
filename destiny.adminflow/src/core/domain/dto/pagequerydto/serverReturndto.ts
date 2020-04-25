@@ -1,8 +1,7 @@
 //返回分页数据
-export interface IServcerReturn<T>
-{
+export interface IServcerReturn<T> {
     Success: boolean;
     Total: number;
-    Data: T;
+    ItemList: T;
     Message: string;
 }

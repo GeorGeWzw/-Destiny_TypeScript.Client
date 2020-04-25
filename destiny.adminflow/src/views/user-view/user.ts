@@ -7,7 +7,7 @@ import PageCom from "@/components/Page/page.vue"
 import Page from "@/components/Page/page"
 
 import requsest from '@/utils/request.ts'
-import { UserApiInfo } from '@/core/apiconfig/ApiRouter';
+import { UserApiInfo, RoleApiInfo } from '@/core/apiconfig/ApiRouter';
 import { Sex } from '@/core/model/model';
 import { AjaxResult } from '@/core/domain/dto/operationdto/AjaxResult';
 @Component({
@@ -27,9 +27,15 @@ export default class User extends Vue {
     private isShow = false;
     public confirmLoading: boolean = false;
     private Pagination: PaginationHandle = new PaginationHandle();
+
     @Ref("page")
     private page!: Page;
     private Total: number = 0;
+
+    private roleList = [{
+        Value: "",
+        Text: "",
+    }];
 
     private formItem: any = {
 
@@ -40,6 +46,7 @@ export default class User extends Vue {
         Description: "",
         IsSystem: false,
         IsAdd: true,
+        RoleIds: ""
     };
 
     private sexList: any = [{
@@ -58,7 +65,7 @@ export default class User extends Vue {
             align: 'center'
         },
         {
-            title: '用户名',
+            title: '登录名',
             key: 'UserName',
 
         },
@@ -87,10 +94,25 @@ export default class User extends Vue {
         }
     ];
 
+    private ruleValidate: any = {
+        UserName: [
+            { required: true, message: '请输入登录名', trigger: 'blur' },
+        ],
+        NickName: [
+            { required: true, message: '请输入用户昵称', trigger: 'blur' },
+
+        ],
+        PasswordHash: [
+            { required: true, message: '请输入密码', trigger: 'blur' },
+
+        ]
+    };
+
     private delteLoading: boolean = false;
     private mounted() {
         // lat 
-        this.getUser(this.Pagination)
+        this.getUser(this.Pagination);
+        this.getUserSelect();
     }
     ///获取数据{//在方法参数内接受子组件传递过来的参数}
     @Emit()
@@ -103,16 +125,17 @@ export default class User extends Vue {
         //     { SortDirection: SortDirection.Descending, SortField: "Name" }
         // ]
         let data = (await MainManager.Instance().UserService.GetPage(this.query));
-        this.TableData = data.Data;
+        this.TableData = data.ItemList;
         _Paginationhan.Pagination.Total = data.Total;
     }
 
+
+
     private addHandle(): void {
 
-        let $this = this;
-        this.getSingleSeletedRow(this.selections, function (id: string, row: any) {
-
-        });
+        this.isShow = true;
+        this.formItem.RoleIds = "";
+        this.formItem.IsAdd = true;
     }
 
     private deleteHandle(): void {
@@ -127,7 +150,14 @@ export default class User extends Vue {
             }).then((result: AjaxResult) => {
 
                 $this.delteLoading = false;
-                $this.$Message.info(result.Message);
+                if (result.Success) {
+
+                    $this.$Message.info("删除用户成功!!");
+                }
+                else {
+                    $this.$Message.info(result.Message);
+                }
+
                 $this.getUser($this.Pagination);
 
             }).catch((error: AjaxResult) => {
@@ -140,7 +170,9 @@ export default class User extends Vue {
     private cancel(): void {
 
         this.isShow = false;
-        this.formItem = [];
+        this.formItem.RoleIds = "";
+        (this.$refs["formItem"] as any).resetFields();
+        // this.formItem = [];
     }
 
     private selectionChange(selection: any): void {
@@ -190,6 +222,7 @@ export default class User extends Vue {
                 }
             }).then((response: any) => {
                 let result = response as AjaxResult;
+
                 $this.isShow = true;
                 $this.formItem = result.Data;
                 $this.formItem.IsAdd = false;
@@ -202,22 +235,46 @@ export default class User extends Vue {
 
     }
 
+
+    private getUserSelect() {
+
+        requsest.get<any, AjaxResult>(RoleApiInfo.SelectRole).then((result) => {
+            this.roleList = result.Data;
+
+        }).catch((error) => {
+
+
+
+        });
+    }
+
+
     private async handleSubmit() {
         let pa = Object.assign(this.formItem);
         this.confirmLoading = true;
-        requsest.post(UserApiInfo.AddUser, pa).then(async (response: any) => {
+        (this.$refs["formItem"] as any).validate((valid: any) => {
 
-            let result = response as AjaxResult;
-            this.$Message.info(result.Message);
-            if (result.Success) {
+            if (valid) {
+                requsest.post(UserApiInfo.AddOrUpdate, pa).then(async (response: any) => {
 
-                this.isShow = false;
-                await this.getUser(this.Pagination);
+                    let result = response as AjaxResult;
+
+                    if (result.Success) {
+
+                        this.isShow = false;
+                        await this.getUser(this.Pagination);
+                        this.$Message.info("保存用户成功!!");
+                    } else {
+                        this.$Message.info(result.Message);
+                    }
+                    this.confirmLoading = false;
+                }).catch((error: any) => {
+
+                });
             }
-            this.confirmLoading = false;
-        }).catch((error: any) => {
 
         });
+
         // console.log(Object.assign(this.formItem));
     }
 }

@@ -3,7 +3,7 @@ export class PageData<TData> {
 
 
     //数据
-    Data: TData[] = [];
+    ItemList: TData[] = [];
 
     ///总数量
     Total: number = 0;
