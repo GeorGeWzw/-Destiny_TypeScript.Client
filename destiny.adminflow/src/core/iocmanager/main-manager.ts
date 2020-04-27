@@ -3,6 +3,7 @@ import {IocTypes} from "@/core/iocconfig/ioc-types"
 import {MainService} from "./main-services"
 import {IRoleService} from "@/core/domain/services/roleservice/IRoleService"
 import {IUserService} from "@/core/domain/services/userservices/IUserservice"
+import {IMenuService} from "@/core/domain/services/menuservice/IMenuserveces"
 //创建主入口
 export class MainManager{
     private static s_instance:MainManager;
@@ -19,6 +20,9 @@ export class MainManager{
     }
     public get UserService():IUserService{
         return this.services.UserServices;
+    }
+    public get MenuService():IMenuService{
+        return this.services.MenuServices;
     }
     //#endregion
   // 主入口服务

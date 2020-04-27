@@ -9,41 +9,7 @@ export default class Roleadd extends Mixins() {
     private query: Pagination = new Pagination();
     private Roleadd: RoleAddDto = new RoleAddDto;
     private Isshow: boolean = false;
-    private data4:any=[
-        {
-            title: 'parent 1',
-            expand: true,
-            selected: true,
-            children: [
-                {
-                    title: 'parent 1-1',
-                    expand: true,
-                    children: [
-                        {
-                            title: 'leaf 1-1-1',
-                            disabled: true
-                        },
-                        {
-                            title: 'leaf 1-1-2'
-                        }
-                    ]
-                },
-                {
-                    title: 'parent 1-2',
-                    expand: true,
-                    children: [
-                        {
-                            title: 'leaf 1-2-1',
-                            checked: true
-                        },
-                        {
-                            title: 'leaf 1-2-1'
-                        }
-                    ]
-                }
-            ]
-        }
-    ];
+    private data4:any=[];
     private ruleValidate:any={
         name: [
             { required: true, message: '请输入角色名称', trigger: 'blur' }
@@ -56,7 +22,9 @@ export default class Roleadd extends Mixins() {
      * 添加角色弹框
      * @param _callback 
      */
-    public ShowWindow(_callback: (res: boolean) => void) {
+    public async ShowWindow(_callback: (res: boolean) => void) {
+        let data= (await MainManager.Instance().MenuService.GetTree()).Data;
+        this.data4=data;
         this.Roleadd.description = "";
         this.Roleadd.isAdmin = false;
         this.Roleadd.name = "";

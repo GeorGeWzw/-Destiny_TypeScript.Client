@@ -2,6 +2,7 @@
 const IocTypes = {
     RoleService:Symbol("RoleService"),
     MainService: Symbol("MainService"),
-    UserService: Symbol("UserService")
+    UserService: Symbol("UserService"),
+    MenuService:Symbol("MenuService")
 }
 export {IocTypes}
