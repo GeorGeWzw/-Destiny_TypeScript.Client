@@ -15,6 +15,7 @@ export default class Page extends Vue {
     private ClickCurrentPage(index: any) {
         console.log("index", index);
         this.Paginationhan.Pagination.PageIndex = index;
+        
         this.$emit("pageref", this.Paginationhan)
     }
 }

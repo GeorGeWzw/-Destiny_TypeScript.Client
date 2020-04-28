@@ -1,6 +1,19 @@
 
 <template>
-  <Card :bordered="false">
+  <Card :bordered="true">
+    <div style="margin-bottom:10px;" class="table-page-search-wrapper">
+      <Form ref="formCustom" :label-width="80" inline>
+        <FormItem label="登录名:">
+          <Input autocomplete="off" />
+        </FormItem>
+        <FormItem label="昵称:">
+          <Input autocomplete="off" />
+        </FormItem>
+        <FormItem>
+          <Button type="primary" shape="circle" icon="ios-search">Search</Button>
+        </FormItem>
+      </Form>
+    </div>
     <!-- <div class="content">
       <i-form :label-width="80" inline>
         <Form-item label="用户名">
@@ -13,7 +26,7 @@
       <i-button type="primary" @click="updateHandle">修改</i-button>
       <i-button type="primary" @click="deleteHandle" :loading="delteLoading">删除</i-button>
     </div>
-    <i-table :columns="columns" :data="TableData" @on-selection-change="selectionChange"></i-table>
+    <i-table border :columns="columns" :data="TableData" @on-selection-change="selectionChange"></i-table>
     <PageCom v-on:pageref="getUser"></PageCom>
     <Modal
       width="40%"
@@ -90,29 +103,21 @@
   }
 }
 .table-page-search-wrapper {
-  // .ivu-form-inline {
-  //   .ivu-form-item {
-  //     display: flex;
-  //     margin-bottom: 24px;
-  //     margin-right: 0;
+  -moz-box-shadow: 5px 5px 16px #ccc;
 
-  //     .ivu-input-wrapper {
-  //       flex: 1 1;
-  //       display: inline-block;
-  //       vertical-align: middle;
-  //     }
+  -webkit-box-shadow: 5px 5px 16px #ccc;
 
-  //     > .ivu-form-item-label {
-  //       line-height: 32px;
-  //       padding-right: 8px;
-  //       width: auto;
-  //     }
-  //     .ivu-form-item-content {
-  //       height: 32px;
-  //       line-height: 32px;
-  //     }
-  //   }
-  // }
+  box-shadow: 5px 5px 16px #ccc;
+  // background-color: #f8f8f9;
+  margin-bottom: 24px;
+  .ivu-form-inline {
+    .ivu-form-item {
+      margin: 10px;
+    }
+  }
+  .ivu-form .ivu-form-item-label {
+    color: rgba(0, 0, 0, 0.85);
+  }
   .table-page-search-submitButtons {
     display: block;
     margin-bottom: 24px;

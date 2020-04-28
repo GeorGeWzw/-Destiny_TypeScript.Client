@@ -119,14 +119,14 @@ export default class User extends Vue {
     private async getUser(_Paginationhan: PaginationHandle) {
         this.query.PageIndex = _Paginationhan.Pagination.PageIndex;
         this.query.PageSize = _Paginationhan.Pagination.PageRow;
-
+        _Paginationhan.Pagination.Total = 850;
         // this.query.OrderConditions = [
         //     { SortDirection: SortDirection.Ascending, SortField: "Id" },
         //     { SortDirection: SortDirection.Descending, SortField: "Name" }
         // ]
-        let data = (await MainManager.Instance().UserService.GetPage(this.query));
-        this.TableData = data.ItemList;
-        _Paginationhan.Pagination.Total = data.Total;
+        // let data = (await MainManager.Instance().UserService.GetPage(this.query));
+        this.TableData = [];
+        // _Paginationhan.Pagination.Total = 850;
     }
 
 

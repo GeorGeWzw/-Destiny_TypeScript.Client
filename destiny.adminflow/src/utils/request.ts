@@ -17,11 +17,11 @@ service.interceptors.request.use(
 ///返回拦截器
 service.interceptors.response.use(
     response => {
-        let data = response.data;
-        if (data.Success == true) {
+        // let data = response.data;
+        // if (data.Success == true) {
 
-            return Promise.reject(null);
-        }
+        //     return Promise.reject(null);
+        // }
         // console.log(response);
         return response.data;
     },
