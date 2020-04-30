@@ -1,4 +1,4 @@
-import { Component, Vue, Prop, Ref, Emit } from "vue-property-decorator";
+import { Component, Vue, Prop, Ref, Emit, Watch } from "vue-property-decorator";
 import { Pagination, OrderCondition, SortDirection } from '@/core/domain/dto/pagequerydto/querydto.ts'
 import { PaginationHandle } from "@/core/domain/dto/pagecomponent/Pagecomponent"
 import { MainManager } from "@/core/iocmanager/main-manager"
@@ -26,6 +26,7 @@ export default class User extends Vue {
     private selections: [] = [];
     private isShow = false;
     public confirmLoading: boolean = false;
+
     private Pagination: PaginationHandle = new PaginationHandle();
 
     @Ref("page")
@@ -112,21 +113,21 @@ export default class User extends Vue {
     private mounted() {
         // lat 
         this.getUser(this.Pagination);
-        this.getUserSelect();
+        //this.getUserSelect();
     }
     ///获取数据{//在方法参数内接受子组件传递过来的参数}
     @Emit()
     private async getUser(_Paginationhan: PaginationHandle) {
         this.query.PageIndex = _Paginationhan.Pagination.PageIndex;
         this.query.PageSize = _Paginationhan.Pagination.PageRow;
-        _Paginationhan.Pagination.Total = 850;
+
         // this.query.OrderConditions = [
         //     { SortDirection: SortDirection.Ascending, SortField: "Id" },
         //     { SortDirection: SortDirection.Descending, SortField: "Name" }
         // ]
-        // let data = (await MainManager.Instance().UserService.GetPage(this.query));
-        this.TableData = [];
-        // _Paginationhan.Pagination.Total = 850;
+        let data = (await MainManager.Instance().UserService.GetPage(this.query));
+        this.TableData = data.ItemList;
+        _Paginationhan.Pagination.Total = 850;
     }
 
 
