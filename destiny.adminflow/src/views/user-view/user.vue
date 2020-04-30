@@ -26,8 +26,11 @@
       <i-button type="primary" @click="updateHandle">修改</i-button>
       <i-button type="primary" @click="deleteHandle" :loading="delteLoading">删除</i-button>
     </div>
-    <i-table border :columns="columns" :data="TableData" @on-selection-change="selectionChange"></i-table>
-    <PageCom v-on:pageref="getUser"></PageCom>
+
+
+
+    <i-table :columns="columns" :data="TableData" @on-selection-change="selectionChange"></i-table>
+    <PageCom v-on:pageref="getUser" :total="total"></PageCom>
     <Modal
       width="40%"
       v-model="isShow"

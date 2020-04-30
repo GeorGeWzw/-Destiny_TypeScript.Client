@@ -28,7 +28,7 @@ export default class User extends Vue {
     public confirmLoading: boolean = false;
 
     private Pagination: PaginationHandle = new PaginationHandle();
-
+    private total:number=0;
     @Ref("page")
     private page!: Page;
     private Total: number = 0;
@@ -111,7 +111,7 @@ export default class User extends Vue {
 
     private delteLoading: boolean = false;
     private mounted() {
-        // lat 
+
         this.getUser(this.Pagination);
         //this.getUserSelect();
     }
@@ -120,7 +120,7 @@ export default class User extends Vue {
     private async getUser(_Paginationhan: PaginationHandle) {
         this.query.PageIndex = _Paginationhan.Pagination.PageIndex;
         this.query.PageSize = _Paginationhan.Pagination.PageRow;
-
+         this.total= 20;
         // this.query.OrderConditions = [
         //     { SortDirection: SortDirection.Ascending, SortField: "Id" },
         //     { SortDirection: SortDirection.Descending, SortField: "Name" }
@@ -128,6 +128,7 @@ export default class User extends Vue {
         let data = (await MainManager.Instance().UserService.GetPage(this.query));
         this.TableData = data.ItemList;
         _Paginationhan.Pagination.Total = 850;
+
     }
 
 

@@ -1,6 +1,6 @@
 <template>
   <Page
-    :total="Paginationhan.Pagination.Total"
+    :total="total"
     :current="Paginationhan.Pagination.PageIndex"
     :page-size-opts="Paginationhan.Pagination.PasizeArr"
     :page-size="Paginationhan.Pagination.PageRow"
