@@ -4,7 +4,13 @@ import { PaginationHandle } from "@/core/domain/dto/pagecomponent/Pagecomponent"
     name: "page",
 })
 export default class Page extends Vue {
+    @Prop()
+    total!:number;
+    // pageref!:
     public Paginationhan: PaginationHandle = new PaginationHandle();
+    private mounted(){
+        this.$emit("pageref", this.Paginationhan)
+    }
     //修改每页行数时触发
     private UpdatePageRow(Row: any) {
         console.log("Row", Row);
