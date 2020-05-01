@@ -28,7 +28,7 @@ export default class User extends Vue {
     public confirmLoading: boolean = false;
 
     private Pagination: PaginationHandle = new PaginationHandle();
-    private total:number=0;
+    private total: number = 0;
     @Ref("page")
     private page!: Page;
     private Total: number = 0;
@@ -113,21 +113,22 @@ export default class User extends Vue {
     private mounted() {
 
         this.getUser(this.Pagination);
-        //this.getUserSelect();
+        this.getUserSelect();
     }
     ///获取数据{//在方法参数内接受子组件传递过来的参数}
     @Emit()
     private async getUser(_Paginationhan: PaginationHandle) {
         this.query.PageIndex = _Paginationhan.Pagination.PageIndex;
         this.query.PageSize = _Paginationhan.Pagination.PageRow;
-         this.total= 20;
+
         // this.query.OrderConditions = [
         //     { SortDirection: SortDirection.Ascending, SortField: "Id" },
         //     { SortDirection: SortDirection.Descending, SortField: "Name" }
         // ]
         let data = (await MainManager.Instance().UserService.GetPage(this.query));
         this.TableData = data.ItemList;
-        _Paginationhan.Pagination.Total = 850;
+        this.total = data.Total;
+        // _Paginationhan.Pagination.Total = 850;
 
     }
 
