@@ -12,25 +12,28 @@ import { UserApiInfo, RoleApiInfo } from '@/core/apiconfig/ApiRouter';
 import { Sex } from '@/core/model/model';
 import { AjaxResult } from '@/core/domain/dto/operationdto/AjaxResult';
 import { FilterInfo, FilterItem, FilterOperator } from '@/core/domain/dto/pagequerydto/FilterInfoDto';
-
+import UserEditForm from "@/views/user-view/EditForm"
 import Util from '@/utils/util.ts';
+
+import UserEdit from "@/views/user-view/editForm.vue"
 @Component({
     name: "user",
     components: {
         PageCom,
-        Search
+        Search,
+        UserEdit
     }
 })
 export default class User extends Vue {
 
-
+    @Ref("UserEditInfo")
+    private UserEditInfo!: UserEditForm;
     private query: Pagination = new Pagination();
     private TableData: UserTable[] = [];
     private pageSize: number = 1;
     private pgeIndex: number = 1;
     private selections: [] = [];
-    private isShow = false;
-    public confirmLoading: boolean = false;
+
 
     private Pagination: PaginationHandle = new PaginationHandle();
     private total: number = 0;
@@ -38,10 +41,6 @@ export default class User extends Vue {
     private page!: Page;
     private Total: number = 0;
 
-    private roleList = [{
-        Value: "",
-        Text: "",
-    }];
 
 
 
@@ -115,31 +114,22 @@ export default class User extends Vue {
         }
     ];
 
-    private ruleValidate: any = {
-        UserName: [
-            { required: true, message: '请输入登录名', trigger: 'blur' },
-        ],
-        NickName: [
-            { required: true, message: '请输入用户昵称', trigger: 'blur' },
-
-        ],
-        PasswordHash: [
-            { required: true, message: '请输入密码', trigger: 'blur' },
-
-        ]
-    };
 
     private delteLoading: boolean = false;
     private mounted() {
 
         this.getUser(this.Pagination);
-        this.getUserSelect();
+        // this.getUserSelect();
     }
     ///获取数据{//在方法参数内接受子组件传递过来的参数}
     @Emit()
     private async getUser(_Paginationhan: PaginationHandle) {
         this.query.PageIndex = _Paginationhan.Pagination.PageIndex;
         this.query.PageSize = _Paginationhan.Pagination.PageRow;
+        let orderCondition: OrderCondition = new OrderCondition();
+        orderCondition.SortDirection = SortDirection.Descending;
+        orderCondition.SortField = "CreatedTime";
+        this.query.OrderConditions.push(orderCondition);
 
         // this.query.OrderConditions = [
         //     { SortDirection: SortDirection.Ascending, SortField: "Id" },
@@ -153,18 +143,12 @@ export default class User extends Vue {
     }
 
 
+    private addHandle() {
 
-    private addHandle(): void {
-
-        this.isShow = true;
-        this.formItem.RoleIds = "";
-        this.formItem.IsAdd = true;
-        this.formItem.UserName = "";
-        this.formItem.NickName = "";
-        this.formItem.Sex = 0;
-        this.formItem.IsSystem = false;
-        this.formItem.PasswordHash = "";
-        this.formItem.Description = "";
+        let $this = this;
+        $this.UserEditInfo.addHandle(() => {
+            $this.getUser($this.Pagination);
+        });
     }
 
     private deleteHandle(): void {
@@ -197,13 +181,13 @@ export default class User extends Vue {
 
     }
 
-    private cancel(): void {
+    // private cancel(): void {
 
-        this.isShow = false;
-        this.formItem.RoleIds = "";
-        (this.$refs["formItem"] as any).resetFields();
-        // this.formItem = [];
-    }
+    //     this.isShow = false;
+    //     this.formItem.RoleIds = "";
+    //     (this.$refs["formItem"] as any).resetFields();
+    //     // this.formItem = [];
+    // }
 
     private selectionChange(selection: any): void {
         this.selections = selection;
@@ -214,70 +198,19 @@ export default class User extends Vue {
 
     private updateHandle(): void {
         let $this = this;
+        Util.getSingleSeletedRow($this.selections, function (id: string, row: any) {
+            $this.UserEditInfo.LoadUser(id, () => {
 
-        Util.getSingleSeletedRow(this.selections, function (id: string, row: any) {
-
-            requsest.get(UserApiInfo.LoadUser, {
-                params: {
-                    id: id
-                }
-            }).then((response: any) => {
-                let result = response as AjaxResult;
-
-                $this.isShow = true;
-                $this.formItem = result.Data;
-                $this.formItem.IsAdd = false;
-
-            }).catch((error: any) => {
-
-
+                $this.getUser($this.Pagination);
             });
+
         });
 
     }
 
 
-    private getUserSelect() {
-
-        requsest.get<any, AjaxResult>(RoleApiInfo.SelectRole).then((result) => {
-            this.roleList = result.Data;
-
-        }).catch((error) => {
 
 
-
-        });
-    }
-
-
-    private async handleSubmit() {
-        let pa = Object.assign(this.formItem);
-        this.confirmLoading = true;
-        (this.$refs["formItem"] as any).validate((valid: any) => {
-
-            if (valid) {
-                requsest.post(UserApiInfo.AddOrUpdate, pa).then(async (response: any) => {
-
-                    let result = response as AjaxResult;
-
-                    if (result.Success) {
-
-                        this.isShow = false;
-                        await this.getUser(this.Pagination);
-                        this.$Message.info("保存用户成功!!");
-                    } else {
-                        this.$Message.info(result.Message);
-                    }
-                    this.confirmLoading = false;
-                }).catch((error: any) => {
-
-                });
-            }
-
-        });
-
-        // console.log(Object.assign(this.formItem));
-    }
 
     private async search(value: any) {
         let filterInfoArr: FilterInfo[] = (this.$refs["formCustom"] as any).getFilterInfo();
@@ -285,4 +218,5 @@ export default class User extends Vue {
         await this.getUser(this.Pagination);
 
     }
+
 }

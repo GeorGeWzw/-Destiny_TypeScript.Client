@@ -8,6 +8,7 @@ export class Pagination {
     public Filters: FilterInfo[] = [];
 }
 export class OrderCondition {
+
     public SortDirection!: SortDirection;
     public SortField!: string;
 }
