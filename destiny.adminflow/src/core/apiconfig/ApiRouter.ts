@@ -1,6 +1,6 @@
 //所有的API接口存放文件，每个业务模块顶定义一个const
 export const RoleApiInfo = {
-    GetRolePage: "api/Role/Get",
+    GetRolePage: "api/Role/GetRolePageAsync",
     AddRole: "api/Role/Create",
     EditRole: "",
     DeleteRole: "",

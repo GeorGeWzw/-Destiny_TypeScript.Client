@@ -2,14 +2,15 @@ import requsest from '@/utils/request.ts'
 import { RoleApiInfo } from '@/core/apiconfig/ApiRouter.ts'
 import { Pagination } from '@/core/domain/dto/pagequerydto/querydto.ts'
 import { IServcerReturn } from '@/core/domain/dto/pagequerydto/serverReturndto.ts'
-import { RoleAddDto } from "@/core/domain/dto/roledto/RoleDto"
+import { RolePageDto } from "@/core/domain/dto/roledto/RolePageDto"
 import { AjaxResult } from '@/core/domain/dto/operationdto/AjaxResult'
+import { PageData } from '@/core/domain/dto/pageDto/pageListDto'
 // import {Role} from '@/core/domain/dto/roledto/RoleDto.ts'
 
 export default class RoleApiBase {
-    static AddRole(_Roleadd: RoleAddDto): Promise<AjaxResult> {
+    static GetRolePage(_search: Pagination): Promise<PageData<RolePageDto>> {
         return new Promise((resolve, reject) => {
-            requsest.post(RoleApiInfo.AddRole, _Roleadd).then((response: any) => {
+            requsest.post(RoleApiInfo.GetRolePage, _search).then((response: any) => {
                 resolve(response);
             }).catch((error: any) => {
                 reject(error)

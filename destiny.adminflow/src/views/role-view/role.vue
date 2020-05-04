@@ -1,10 +1,17 @@
 <template>
+  <Card :bordered="true">
     <div>
-        <div >
-            <Button type="primary" @click="AddRole()">Submit</Button>
-        </div>
-        <RoleAddCom ref="RoleAddInfo"></RoleAddCom>
+      <Button type="primary" @click="AddRole()">Submit</Button>
     </div>
+    <div>
+      <Scroll :height="Maxheight">
+        <Table :height="TableMaxheight" border :columns="columns" :data="RoleTable"></Table>
+      </Scroll>
+      <PageCom v-on:pageref="GetPage" :total="total"></PageCom>
+    </div>
+
+    <!-- <RoleAddCom ref="RoleAddInfo"></RoleAddCom> -->
+  </Card>
 </template>
 <script lang="ts" src="./role.ts">
 </script>>
