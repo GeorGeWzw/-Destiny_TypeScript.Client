@@ -2,12 +2,12 @@ import {Component, Vue, Ref, Mixins} from "vue-property-decorator";
 import {Pagination} from '@/core/domain/dto/pagequerydto/querydto.ts'
 import {MainManager} from "@/core/iocmanager/main-manager"
 import PageCom from "@/components/Page/page.vue"
-import Page from "@/components/Page/page"
+
 
 import RoleAddCom from "./roleadd.vue"
 
 import Roleadd from "@/views/role-view/roleadd"
-import {RolePageDto} from "@/core/domain/dto/roledto/RolePageDto" 
+import {RolePageDto} from "@/core/domain/dto/roledto/RoleDto" 
 import { PaginationHandle } from '@/core/domain/dto/pagecomponent/Pagecomponent';
 
 
@@ -92,7 +92,7 @@ export default class Role extends Mixins(){
         this.RoleAddInfo.ShowWindow((res:boolean)=>{
             if(res)
             {
-                // this.get();
+                this.GetPage(this.Pagination);
             }
         })
     }

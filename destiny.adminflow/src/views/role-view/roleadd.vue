@@ -2,7 +2,7 @@
   <div>
     <Modal width="40%" v-model="Isshow"   :mask-closable="false" title="添加角色"  @on-cancel="cancel">
       <Form :model="Roleadd"  :label-width="80" ref="Roleadd" :rules="ruleValidate">
-        <FormItem  label="角色名称" prop="name">
+        <FormItem  label="角色名称" prop="Name">
           <Input  v-model="Roleadd.Name" placeholder="请输入角色名称"/>
         </FormItem>
         <FormItem  label="标准名称">

@@ -2,9 +2,10 @@ import { injectable } from "inversify"
 import "reflect-metadata"
 import { Pagination } from "@/core/domain/dto/pagequerydto/querydto.ts";
 import { IServcerReturn } from "../../dto/pagequerydto/serverReturndto";
+import { AjaxResult } from '@/core/domain/dto/operationdto/AjaxResult'
 
 import { IRoleService } from "./IRoleService"
-import { RolePageDto } from "@/core/domain/dto/roledto/RolePageDto"
+import { RolePageDto,RoleAddDto } from "@/core/domain/dto/roledto/RoleDto"
 
 import RoleApiBase from "@/core/data-source/requestapi/roleapi/rolerequestApi"
 import { PageData } from '../../dto/pageDto/pageListDto';
@@ -12,15 +13,18 @@ import { PageData } from '../../dto/pageDto/pageListDto';
 
 @injectable()
 export default class RoleService implements IRoleService {
+    
     /**
-     * 添加角色
+     * 分页查询
      */
     async PageRole(_search: Pagination): Promise<PageData<RolePageDto>> {
         return RoleApiBase.GetRolePage(_search);
     }
-    // GetPage(_query: Pagination): Promise<IServcerReturn<Role>> {
-    //     debugger
-    //     return RoleserviceBase.GetUserPage(_query);
-    // };
+    /**
+     * 新增角色
+     */
+    async AddRole(_addrole: RoleAddDto): Promise<AjaxResult> {
+        return RoleApiBase.AddRole(_addrole);
+    }
 
 }
