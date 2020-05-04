@@ -25,4 +25,5 @@ export class RoleAddDto{
     IsAdmin: boolean=false;
     Description: string = "";
     Code:string="";
+    menuIds:string[]=[];
 }

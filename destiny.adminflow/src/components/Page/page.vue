@@ -1,4 +1,5 @@
 <template>
+<div style="height:40px;line-height:40px;">
   <Page
     show-total
     :total="total"
@@ -9,5 +10,6 @@
     @on-page-size-change="UpdatePageRow"
     show-sizer
   />
+  </div>
 </template>
 <script lang="ts" src="./page.ts">

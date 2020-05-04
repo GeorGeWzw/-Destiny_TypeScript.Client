@@ -1,14 +1,14 @@
 <template>
-  <Card :bordered="true">
-    <div>
+  <Card :bordered="true" class="continatcar">
+    <div class="commtable">
       <Button type="primary" @click="AddRole()">新增</Button>
     </div>
-    <div>
-      <Scroll :height="Maxheight">
+    <!-- <div> -->
+      <!-- <Scroll :height="Maxheight"> -->
         <Table :height="TableMaxheight" border :columns="columns" :data="RoleTable"></Table>
-      </Scroll>
+      <!-- </Scroll> -->
       <PageCom v-on:pageref="GetPage" :total="total"></PageCom>
-    </div>
+    <!-- </div> -->
 
     <RoleAddCom ref="RoleAddInfo"></RoleAddCom>
   </Card>

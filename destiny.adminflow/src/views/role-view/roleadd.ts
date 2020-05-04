@@ -8,7 +8,7 @@ export default class Roleadd extends Mixins() {
     private Roleadd: RoleAddDto = new RoleAddDto;
     private Isshow: boolean = false;
     private SuccessCallback: any;
-    private data4: any = [];
+    private TreeData: any = [];
     private ruleValidate: any = {
         Name: [
             { required: true, message: '请输入角色名称', trigger: 'blur' }
@@ -23,7 +23,7 @@ export default class Roleadd extends Mixins() {
      */
     public async ShowWindow(_callback: (res: boolean) => void) {
         let data = (await MainManager.Instance().MenuService.GetTree()).Data;
-        this.data4 = data;
+        this.TreeData = data;
         this.Roleadd.Description = "";
         this.Roleadd.IsAdmin = false;
         this.Roleadd.Name = "";
@@ -35,9 +35,18 @@ export default class Roleadd extends Mixins() {
     /**
      * 保存新增角色
      */
-    public async Roleaddservice() {
+    private async Roleaddservice() {
         (this.$refs as any).Roleadd.validate(async (valid: any) => {
             if (valid) {
+                /**
+                 * 获取到所有选中的节点ID
+                 */
+                let menuids= this.$refs.Menu.getCheckedAndIndeterminateNodes();
+                let menuarr: any[]=[];
+                menuids.forEach((element: any) => {
+                    menuarr.push(element.Id);
+                });
+                this.Roleadd.menuIds=menuarr;
                 let result = await MainManager.Instance().RoleService.AddRole(this.Roleadd);
                 if (result.Success) {
                     this.SuccessCallback(result.Success);

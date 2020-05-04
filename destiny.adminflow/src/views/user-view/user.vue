@@ -59,8 +59,9 @@
       <i-button type="primary" @click="updateHandle">修改</i-button>
       <i-button type="primary" @click="deleteHandle" :loading="delteLoading">删除</i-button>
     </div>
-
+<Scroll height="800">
     <i-table :columns="columns" :data="TableData" @on-selection-change="selectionChange"></i-table>
+    </Scroll>
     <PageCom v-on:pageref="getUser" :total="total"></PageCom>
     <Modal
       width="40%"

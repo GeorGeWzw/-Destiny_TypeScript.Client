@@ -17,7 +17,7 @@ export default class RoleService implements IRoleService {
     /**
      * 分页查询
      */
-    async PageRole(_search: Pagination): Promise<PageData<RolePageDto>> {
+    async PageRole(_search: Pagination): Promise<any> {
         return RoleApiBase.GetRolePage(_search);
     }
     /**

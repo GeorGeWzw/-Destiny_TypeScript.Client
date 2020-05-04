@@ -22,7 +22,7 @@ export default class Role extends Mixins(){
     private Pagination: PaginationHandle = new PaginationHandle();
     private query: Pagination = new Pagination();
     private Maxheight:number=980;
-    private TableMaxheight:number=750;
+    private TableMaxheight:number=950;
     @Ref("RoleAddInfo")
     private RoleAddInfo!:Roleadd; 
     private RoleTable:RolePageDto []=[];
@@ -81,6 +81,9 @@ export default class Role extends Mixins(){
     
     private mounted()
     {
+        var h=window.innerHeight-300;
+        this.TableMaxheight=h;
+        console.log(this.TableMaxheight)
         this.GetPage(this.Pagination);
     }
 
@@ -101,8 +104,8 @@ export default class Role extends Mixins(){
      */
     private async GetPage(_Paginationhan: PaginationHandle)
     {
-        this.query.PageIndex=1;
-        this.query.PageSize=10;
+        this.query.PageIndex=_Paginationhan.Pagination.PageIndex;
+        this.query.PageSize=_Paginationhan.Pagination.PageRow;
         let data= (await MainManager.Instance().RoleService.PageRole(this.query));
         this.RoleTable=data.ItemList;
         this.total=data.Total;

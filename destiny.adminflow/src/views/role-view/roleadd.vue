@@ -22,7 +22,7 @@
         </FormItem>
       </Form>
       <div>
-        <Tree :data="data4" show-checkbox multiple></Tree>
+        <Tree :data="TreeData" ref="Menu" show-checkbox multiple></Tree>
       </div>
       <div slot="footer">
         <Button @click="cancel" style="margin-left: 8px">取消</Button>
