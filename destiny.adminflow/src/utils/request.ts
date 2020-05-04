@@ -20,9 +20,9 @@ service.interceptors.response.use(
         // let data = response.data;
         // if (data.Success == true) {
 
-        //     return Promise.reject(null);
+        //     return Promise.reject(new Error(data.Message));
         // }
-        // console.log(response);
+        // // console.log(response);
         return response.data;
     },
     error => {

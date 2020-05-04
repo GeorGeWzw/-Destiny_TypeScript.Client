@@ -6,14 +6,19 @@ import { UserTable } from "@/core/domain/dto/userdto/UserDto"
 import PageCom from "@/components/Page/page.vue"
 import Page from "@/components/Page/page"
 
+import Search from "@/components/Search/search.vue"
 import requsest from '@/utils/request.ts'
 import { UserApiInfo, RoleApiInfo } from '@/core/apiconfig/ApiRouter';
 import { Sex } from '@/core/model/model';
 import { AjaxResult } from '@/core/domain/dto/operationdto/AjaxResult';
+import { FilterInfo, FilterItem, FilterOperator } from '@/core/domain/dto/pagequerydto/FilterInfoDto';
+
+import Util from '@/utils/util.ts';
 @Component({
     name: "user",
     components: {
-        PageCom
+        PageCom,
+        Search
     }
 })
 export default class User extends Vue {
@@ -38,6 +43,15 @@ export default class User extends Vue {
         Text: "",
     }];
 
+
+
+    private searchItem: any = {
+
+
+
+    }
+
+
     private formItem: any = {
 
         UserName: "",
@@ -59,6 +73,12 @@ export default class User extends Vue {
     }];
 
 
+    private filterInfo: any = {
+
+        UserName: new FilterItem(),
+        NickName: new FilterItem()
+
+    }
     private columns = [
         {
             type: 'selection',
@@ -139,12 +159,19 @@ export default class User extends Vue {
         this.isShow = true;
         this.formItem.RoleIds = "";
         this.formItem.IsAdd = true;
+        this.formItem.UserName = "";
+        this.formItem.NickName = "";
+        this.formItem.Sex = 0;
+        this.formItem.IsSystem = false;
+        this.formItem.PasswordHash = "";
+        this.formItem.Description = "";
     }
 
     private deleteHandle(): void {
         let $this = this;
         $this.delteLoading = true;
-        this.getSingleSeletedRow(this.selections, function (id: string, row: any) {
+
+        Util.getSingleSeletedRow(this.selections, function (id: string, row: any) {
 
             requsest.delete<any, AjaxResult>(UserApiInfo.DeleteUser, {
                 params: {
@@ -183,41 +210,12 @@ export default class User extends Vue {
 
     }
 
-    private getSingleSeletedRow(selection: [], callback: any, key?: string): void {
-        if (selection == null || selection == undefined || selection.length === 0) {
-
-            this.$Message.info('请选择中数据!!');
-            return;
-        }
-
-        if (selection.length > 1) {
-            this.$Message.info(`已选${selection.length},条选数据，请选择一条数据！！`);
-            return;
-        }
-        let newSelection: Array<any> = selection as [];
-
-        //let obj = newSelection.filter(o => o == key)[0];
-        let fun = function () {
-
-            if (callback) {
-
-                if (typeof (key) == "undefined" || undefined || null) {
-                    key = "Id";
-
-                }
-                callback(newSelection[0][key], newSelection[0]);
-            }
-
-        };
-
-        fun();
-
-    }
 
 
     private updateHandle(): void {
         let $this = this;
-        this.getSingleSeletedRow(this.selections, function (id: string, row: any) {
+
+        Util.getSingleSeletedRow(this.selections, function (id: string, row: any) {
 
             requsest.get(UserApiInfo.LoadUser, {
                 params: {
@@ -279,5 +277,12 @@ export default class User extends Vue {
         });
 
         // console.log(Object.assign(this.formItem));
+    }
+
+    private async search(value: any) {
+        let filterInfoArr: FilterInfo[] = (this.$refs["formCustom"] as any).getFilterInfo();
+        this.query.Filters = filterInfoArr;
+        await this.getUser(this.Pagination);
+
     }
 }
