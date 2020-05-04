@@ -31,21 +31,25 @@ export default class Role extends Mixins(){
         {
             type: 'selection',
             width: 60,
-            align: 'center'
+            align: 'center',
+            minWidth: 120,
         },
         {
             title: '角色名称',
             key: 'Name',
+            minWidth: 120,
         },
         {
             title: '标准化角色名称',
             key: 'NormalizedName',
+            minWidth: 120,
         },
         {
             title: '是否管理员',
             key: 'IsAdmin',
             align: "center",
             maxWidth: 120,
+            minWidth: 120,
             render: (h:any, params:any) => {
                 var text = "";
                 if (params.row.IsAdmin) {
@@ -61,15 +65,17 @@ export default class Role extends Mixins(){
         {
             title: '描述',
             key: 'Description',
+            minWidth: 120,
         },
         {
             title: '编码',
             key: 'Code',
+            minWidth: 120,
         },
         {
             title: '版本标识',
             key: 'ConcurrencyStamp',
-
+            minWidth: 120,
         }
     ];
     

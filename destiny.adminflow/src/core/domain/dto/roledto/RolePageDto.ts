@@ -16,3 +16,13 @@ export class RolePageDto{
     Code:string="";
     ConcurrencyStamp:string="";
 }
+/**
+ * 角色添加Dto
+ */
+export class RoleAddDto{
+    Name: string = "";
+    NormalizedName: string = "";
+    IsAdmin: boolean=false;
+    Description: string = "";
+    Code:string="";
+}

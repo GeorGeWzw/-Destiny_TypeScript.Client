@@ -1,19 +1,17 @@
 import { Component, Mixins,Vue} from "vue-property-decorator";
-import { Pagination } from '@/core/domain/dto/pagequerydto/querydto.ts'
-import { RolePageDto } from "@/core/domain/dto/roledto/RolePageDto"
+import { RoleAddDto } from "@/core/domain/dto/roledto/RolePageDto"
 import { MainManager } from "@/core/iocmanager/main-manager"
 @Component({
     name: "roleadd",
 })
 export default class Roleadd extends Mixins() {
-    private query: Pagination = new Pagination();
-    // private Roleadd: RolePageDto = new RoleAddDto;
+    private Roleadd: RoleAddDto = new RoleAddDto;
     private Isshow: boolean = false;
     private data4:any=[];
     private ruleValidate:any={
-        // name: [
-        //     { required: true, message: '请输入角色名称', trigger: 'blur' }
-        // ],
+        Name: [
+            { required: true, message: '请输入角色名称', trigger: 'blur' }
+        ],
     };
     public cancel() {
         this.Isshow=false;
@@ -23,13 +21,14 @@ export default class Roleadd extends Mixins() {
      * @param _callback 
      */
     public async ShowWindow(_callback: (res: boolean) => void) {
-        // let data= (await MainManager.Instance().MenuService.GetTree()).Data;
-        // this.data4=data;
-        // this.Roleadd.description = "";
-        // this.Roleadd.isAdmin = false;
-        // this.Roleadd.name = "";
-        // this.Roleadd.normalizedName = "";
-        // this.Isshow = true;
+        let data= (await MainManager.Instance().MenuService.GetTree()).Data;
+        this.data4=data;
+        this.Roleadd.Description = "";
+        this.Roleadd.IsAdmin = false;
+        this.Roleadd.Name = "";
+        this.Roleadd.NormalizedName = "";
+        this.Roleadd.Code="";
+        this.Isshow = true;
     }
     /**
      * 保存新增角色
