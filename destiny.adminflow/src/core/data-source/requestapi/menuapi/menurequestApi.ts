@@ -7,9 +7,9 @@ export default class MenuApiBase {
     /*
         _query查询条件
      */
-    static GetTree(): Promise<IServcerTreeReturn> {
+    static GetTree(param:any): Promise<IServcerTreeReturn> {
         return new Promise((resolve, reject) => {
-            requsest.get(MenuApiInfo.GetAuthorityTree).then((response: any) => {
+            requsest.get(MenuApiInfo.GetAuthorityTree,{params:param}).then((response: any) => {
                 resolve(response);
             })
                 .catch((error: any) => {

@@ -2,8 +2,8 @@
 export const RoleApiInfo = {
     GetRolePage: "api/Role/GetRolePageAsync",
     AddRole: "api/Role/CreateAsync",
-    EditRole: "",
-    DeleteRole: "",
+    EditRole: "api/Role/UpdateAsync",
+    DeleteRole: "api/Role/Delete",
     SelectRole: "api/Role/GetRoleSelectListAsync"
 }
 

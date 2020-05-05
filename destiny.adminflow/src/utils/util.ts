@@ -10,7 +10,7 @@ export default class Util {
 
 
         if (selection == null || selection == undefined || selection.length === 0) {
-            this.Message.info('请选择中数据!!');
+            this.Message.info('请选择一行数据!!');
             return;
         }
 

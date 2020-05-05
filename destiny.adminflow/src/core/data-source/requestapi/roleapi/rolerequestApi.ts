@@ -41,7 +41,6 @@ export default class RoleApiBase {
     //         })
     //     })
     // }
-
     static AddRole(_addrole: RoleAddDto): Promise<AjaxResult> {
         return new Promise((resolve, reject) => {
             requsest.post(RoleApiInfo.AddRole, _addrole).then((response: any) => {
@@ -50,6 +49,27 @@ export default class RoleApiBase {
                 reject(error)
             })
         })
+    }
+    static UpdateRole(_updaterole: RoleAddDto): Promise<AjaxResult>
+    {
+        return new Promise((resolve, reject)=>{
+            requsest.put(RoleApiInfo.EditRole,_updaterole).then((response:any)=>{
+                resolve(response);
+            }).catch((error:any)=>{
+                reject(error);
+            })
+        });
+    }
+    static DeleteRole(param:any): Promise<AjaxResult>
+    {
+        debugger
+        return new Promise((resolve, reject)=>{
+            requsest.delete(RoleApiInfo.DeleteRole,{params:param}).then((response:any)=>{
+                resolve(response);
+            }).catch((error:any)=>{
+                reject(error);
+            })
+        });
     }
     /*
         _query查询条件

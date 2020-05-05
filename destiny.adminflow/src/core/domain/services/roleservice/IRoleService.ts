@@ -14,4 +14,13 @@ export interface IRoleService {
      * 新增角色
     */
    AddRole(_addrole: RoleAddDto): Promise<AjaxResult>;
+   /**
+    * 
+    */
+   UpdateRole(_addrole: RoleAddDto): Promise<AjaxResult>;
+   /**
+    * 删除角色
+    * @param param 
+    */
+   DeleteRole(param:any):Promise<AjaxResult>;
 } 

@@ -7,8 +7,11 @@ import Menuleft from "@/components/menu/MenuTab.vue"
         }
 })
 export default class Layout extends Vue{
+    private Maxheight:number=800;
     private created()
     {
+        var h=window.innerHeight-400;
+        this.Maxheight=h;
         let getindex= this.$store.state.TagList.findIndex((x: { path: string; }) => x.path ==this.$route.path);
         let model = {
             lable: "",

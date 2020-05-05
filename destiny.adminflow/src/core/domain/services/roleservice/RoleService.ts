@@ -26,5 +26,20 @@ export default class RoleService implements IRoleService {
     async AddRole(_addrole: RoleAddDto): Promise<AjaxResult> {
         return RoleApiBase.AddRole(_addrole);
     }
+    /**
+    * 修改角色
+    * @param param 
+    */
+    async UpdateRole(_updaterole: RoleAddDto): Promise<AjaxResult> 
+    {
+        return RoleApiBase.UpdateRole(_updaterole);
+    }
+    /**
+    * 删除角色
+    * @param param 
+    */
+    async DeleteRole(param:any):Promise<AjaxResult>{
+        return RoleApiBase.DeleteRole(param);
+    }
 
 }
