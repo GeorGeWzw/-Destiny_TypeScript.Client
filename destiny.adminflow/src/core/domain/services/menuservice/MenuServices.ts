@@ -2,8 +2,9 @@ import { injectable } from "inversify"
 import "reflect-metadata"
 import { IServcerTreeReturn } from "../../dto/pagequerydto/serverReturndto";
 import { IMenuService } from "./IMenuserveces"
-import {MenuOutTreeDto} from "@/core/domain/dto/menudto/MenuResultDto"
+import {MenuOutTreeDto, MenuPageDto} from "@/core/domain/dto/menudto/MenuResultDto"
 import MenuApiBase from "@/core/data-source/requestapi/menuapi/menurequestApi"
+import { PageData } from '../../dto/pageDto/pageListDto';
 
 
 @injectable()
@@ -44,7 +45,9 @@ export default class MenuService implements IMenuService {
         }
         Tree(data);
     }
-
+    async GetData():Promise<PageData<MenuPageDto>>{
+       return MenuApiBase.GetData();
+    }
 
     // GetPage(_query: Pagination): Promise<IServcerReturn<Role>> {
     //     debugger

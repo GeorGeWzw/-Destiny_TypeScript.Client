@@ -48,6 +48,15 @@ const routes = [
               icon:"ios-home-outline",
             },
             component: () => import("@/views/role-view/role.vue")
+          },
+          {
+            path: "Menu",
+            name: "Menu",
+            meta: {
+              title: "菜单管理",
+              icon:"ios-home-outline",
+            },
+            component: () => import("@/views/menu-view/menu.vue")
           }
         ]
       }
