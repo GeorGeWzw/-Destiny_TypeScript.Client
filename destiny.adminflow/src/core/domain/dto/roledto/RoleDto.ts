@@ -26,4 +26,5 @@ export class RoleAddDto{
     Description: string = "";
     Code:string="";
     menuIds:string[]=[];
+    Id:string=Guid.EMPTY;
 }

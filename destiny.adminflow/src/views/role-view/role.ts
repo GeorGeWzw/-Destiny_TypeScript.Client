@@ -2,20 +2,25 @@ import {Component, Vue, Ref, Mixins} from "vue-property-decorator";
 import {Pagination} from '@/core/domain/dto/pagequerydto/querydto.ts'
 import {MainManager} from "@/core/iocmanager/main-manager"
 import PageCom from "@/components/Page/page.vue"
+import { FilterInfo, FilterItem, FilterOperator } from '@/core/domain/dto/pagequerydto/FilterInfoDto';
+import { PaginationHandle } from '@/core/domain/dto/pagecomponent/Pagecomponent';
+import Search from "@/components/Search/search.vue"
+import Util from '@/utils/util.ts';
+
+
 
 
 import RoleAddCom from "./roleadd.vue"
-
 import Roleadd from "@/views/role-view/roleadd"
 import {RolePageDto} from "@/core/domain/dto/roledto/RoleDto" 
-import { PaginationHandle } from '@/core/domain/dto/pagecomponent/Pagecomponent';
 
 
 @Component({
     name:"role",
     components:{
         RoleAddCom,
-        PageCom
+        PageCom,
+        Search
     }
 })
 export default class Role extends Mixins(){
@@ -23,10 +28,27 @@ export default class Role extends Mixins(){
     private query: Pagination = new Pagination();
     private Maxheight:number=980;
     private TableMaxheight:number=950;
+    private searchItem: any = {
+
+
+
+    }
+    private formItem: any = {
+
+        Name: "",
+    };
+    private filterInfo: any = {
+        Name: new FilterItem()
+    };
+
+
+
+
     @Ref("RoleAddInfo")
     private RoleAddInfo!:Roleadd; 
     private RoleTable:RolePageDto []=[];
     private total: number = 0;
+    private selections: [] = [];
     private columns = [
         {
             type: 'selection',
@@ -78,13 +100,18 @@ export default class Role extends Mixins(){
             minWidth: 120,
         }
     ];
-    
     private mounted()
     {
-        var h=window.innerHeight-300;
+        var h=window.innerHeight-450;
         this.TableMaxheight=h;
-        console.log(this.TableMaxheight)
         this.GetPage(this.Pagination);
+    }
+    /**
+     * 选择表格中的数据
+     */
+    private selectionChange(selection: any):void
+    {
+        this.selections=selection;
     }
 
     /*
@@ -109,5 +136,53 @@ export default class Role extends Mixins(){
         let data= (await MainManager.Instance().RoleService.PageRole(this.query));
         this.RoleTable=data.ItemList;
         this.total=data.Total;
+    }
+    private UpdateRole():void
+    {
+        let _this=this;
+        Util.getSingleSeletedRow(this.selections,function(id:string,row:any){
+            _this.RoleAddInfo.UpdateShowWindow(row,(res:boolean)=>{
+                if(res)
+                {
+                    _this.GetPage(_this.Pagination);
+                }
+            })
+        })
+    }
+    private async search(value: any) {
+        let filterInfoArr: FilterInfo[] = (this.$refs["formCustom"] as any).getFilterInfo();
+        this.query.Filters = filterInfoArr;
+        await this.GetPage(this.Pagination);
+
+    }
+    /**
+     * 删除角色
+     */
+    private async DeleteRole()
+    {
+        var _this=this;
+        Util.getSingleSeletedRow(this.selections,async function(id:string){
+            let param={
+                id:id
+            }
+            let result= await MainManager.Instance().RoleService.DeleteRole(param);
+            if(result.Success)
+            {
+                _this.GetPage(_this.Pagination);
+                _this.$Message.success({
+                    content: result.Message,
+                    duration: 5,
+                    closable: true
+                });
+            }
+            else
+            {
+                _this.$Message.error({
+                    content: result.Message,
+                    duration: 5,
+                    closable: true
+                });
+            }
+        })
     }
 }
