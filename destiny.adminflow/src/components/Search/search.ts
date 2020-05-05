@@ -25,7 +25,7 @@ export default class Search extends Vue {
                 if (value !== null) {
 
                     if (value !== undefined) {
-                        filterInfo.push(new FilterInfo(key, value, item.Operator, item.Connect));
+                        filterInfo.push(new FilterInfo(key, value.trim(), item.Operator, item.Connect));
                     }
                 }
 

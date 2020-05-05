@@ -34,6 +34,8 @@ export enum FilterOperator {
     LessThan = 3,
     LessThanOrEqual = 4,
     NotEqual = 5,
+
+    Like = 7
 }
 
 export enum FilterConnect {

@@ -74,8 +74,8 @@ export default class User extends Vue {
 
     private filterInfo: any = {
 
-        UserName: new FilterItem(),
-        NickName: new FilterItem()
+        UserName: new FilterItem(FilterOperator.Like),
+        NickName: new FilterItem(FilterOperator.Like)
 
     }
     private columns = [
@@ -151,32 +151,27 @@ export default class User extends Vue {
         });
     }
 
-    private deleteHandle(): void {
+    private async deleteHandle(): Promise<void> {
         let $this = this;
         $this.delteLoading = true;
 
-        Util.getSingleSeletedRow(this.selections, function (id: string, row: any) {
-
-            requsest.delete<any, AjaxResult>(UserApiInfo.DeleteUser, {
-                params: {
-                    id: id,
-                }
-            }).then((result: AjaxResult) => {
+        Util.getSingleSeletedRow(this.selections, async function (id: string, row: any) {
+            await MainManager.Instance().UserService.DeleteUser(id).then(async (res: AjaxResult) => {
 
                 $this.delteLoading = false;
-                if (result.Success) {
-
+                if (res.Success) {
                     $this.$Message.info("删除用户成功!!");
-                }
-                else {
-                    $this.$Message.info(result.Message);
-                }
 
-                $this.getUser($this.Pagination);
+                } else {
 
+                    $this.$Message.info(res.Message);
+                }
+                await $this.getUser($this.Pagination);
             }).catch((error: AjaxResult) => {
+                $this.delteLoading = false;
                 $this.$Message.info(error.Message);
             });
+
         });
 
     }
