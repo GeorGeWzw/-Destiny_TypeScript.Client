@@ -65,7 +65,7 @@ export default class Roleadd extends Mixins() {
                 /**
                  * 获取到所有选中的节点ID
                  */
-                let menuids = this.$refs.Menu.getCheckedAndIndeterminateNodes();
+                let menuids = (this.$refs as any).Menu.getCheckedAndIndeterminateNodes();
                 let menuarr: any[] = [];
                 menuids.forEach((element: any) => {
                     menuarr.push(element.Id);

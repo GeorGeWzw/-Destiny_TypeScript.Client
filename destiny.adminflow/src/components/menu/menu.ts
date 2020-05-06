@@ -11,7 +11,7 @@ export default class MenuLeft extends Vue {
     private theme2: string = "dark"
     private MenuArr!: [];
     private created() {
-        this.MenuArr = routes.options.routes[0].children
+        this.MenuArr = (routes as any).options.routes[0].children
     }
     //点击左侧菜单事件
     private Openmenu(name: any) {
