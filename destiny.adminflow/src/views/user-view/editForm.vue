@@ -7,7 +7,7 @@
     :closable="false"
     :footer-hide="true"
   >
-    <Form ref="formItem" :model="formItem" :label-width="80" :rules="ruleValidate">
+    <Form ref="formItem" :model="formItem" :label-width="100" :rules="ruleValidate">
       <FormItem label="登录名:" prop="UserName">
         <Input v-model="formItem.UserName" />
       </FormItem>

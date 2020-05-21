@@ -57,10 +57,7 @@
               </div>
             </div>
           </div>
-          <Scroll :height="Maxheight">
             <router-view class="layout_content_view"></router-view>
-          </Scroll>
-          
         </Content>
       </transition>
       <Footer class="layout_footer">Footer</Footer>
