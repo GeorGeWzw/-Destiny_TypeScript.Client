@@ -32,7 +32,7 @@
   </div>
 </template>
 <script lang="ts" src="./roleadd.ts"></script>> 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .ivu-form-inline .ivu-form-item
 {
   width: 24%;
