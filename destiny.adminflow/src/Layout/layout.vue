@@ -65,4 +65,4 @@
   </Layout>
 </template>
 <script lang="ts" src="./layout.ts"></script>
-<style lang="scss" src="./layout.scss"></style>
+<style lang="less" src="./layout.less"></style>

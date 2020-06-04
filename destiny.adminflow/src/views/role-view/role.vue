@@ -45,4 +45,4 @@
 </template>
 <script lang="ts" src="./role.ts">
 </script>>
-<style lang="scss" src="./role.scss"></style>
+<style lang="less" src="./role.less"></style>
