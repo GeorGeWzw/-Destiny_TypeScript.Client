@@ -1,7 +1,8 @@
-import axios from 'axios'
 import NoticeUtils from "./NoticeUtils";
+import axios from 'axios'
+
 const service = axios.create({
-    baseURL: 'http://localhost:50003/',
+    baseURL: 'http://1065.cloud:9602/',
     // timeout: 5000
 });
 
